@@ -5,4 +5,9 @@ RSpec.describe Playlist, type: :model do
     playlist = Playlist.reflect_on_association(:user)
     expect(playlist.macro).to eq(:belongs_to)
   end
+
+  it "has many tracks" do
+    playlist = Playlist.reflect_on_association(:tracks)
+    expect(playlist.macro).to eq(:has_many)
+  end
 end
