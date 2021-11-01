@@ -16,6 +16,7 @@ module Spotipfizer
     # Initialize configuration defaults for originally generated Rails version.
     config.load_defaults 6.0
 
+    RSpotify::authenticate(ENV['CLIENT_ID_SPOTIFY'], ENV['CLIENT_SECRET_SPOTIFY'])
     # Settings in config/environments/* take precedence over those specified here.
     # Application configuration can go into files in config/initializers
     # -- all .rb files in that directory are automatically loaded after loading
