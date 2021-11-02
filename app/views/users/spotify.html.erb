@@ -1,0 +1,45 @@
+<aside class="left-menu">
+    <div class="profile">
+        <div class="image">
+            <img src="https://www.handiclubnimois.fr/wp-content/uploads/2020/10/blank-profile-picture-973460_1280.png" alt="">
+        </div>
+        <span class="fullname"><%= @user.name  %></span>
+    </div>
+
+    <nav class="menu">
+        <%= render partial:'users/partials/browse_media'%>
+    </nav>
+
+    <nav class="menu">
+        <%= render partial:'users/partials/library'%>
+    </nav>
+</aside>
+
+<section class="container">
+    <header>
+        <div class="search">
+            <input type="text" placeholder="Search by song, artist, album, video, podcast ..."/>
+            <ion-icon name="search"></ion-icon>
+        </div>
+        <div class="btn-settings">
+            <ion-icon name="settings-outline"></ion-icon>
+        </div>
+    </header>
+    <main>
+        <%= render partial:'users/partials/release'%>
+        <%= render partial:'users/partials/toptrack'%>
+        <div class="track-list table">
+            <header>
+                <h2><span>Your playlist</span></h2>
+                <a href="#" class="more">See All</a>
+            </header>
+            <% if  @tracks %>
+                <ul>
+                    <%= render partial:'users/partials/track', collection: @tracks, as: :track%>
+                </ul>
+            <% end %>
+        </div>
+    </main>
+</section>
+
+<%= render partial:'users/partials/currently-playing'%>
