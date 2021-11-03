@@ -32,6 +32,7 @@ gem 'autoprefixer-rails', '10.2.5'
 gem 'font-awesome-sass'
 gem 'simple_form'
 gem 'rspotify'
+gem 'httparty', '~> 0.13.7'
 group :development, :test do
   gem 'pry-byebug'
   gem 'pry-rails'
