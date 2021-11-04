@@ -4,11 +4,12 @@ class Deviseusers::OmniauthCallbacksController < Devise::OmniauthCallbacksContro
     # rescue_from ActionDispatch::Cookies::CookieOverflow,  with: :clean_spotify_cookies
 
     def spotify
-    #   session[:spotify_auth] = request.env['omniauth.auth']
-      @user = Deviseuser.find_or_create_by(
+        #   session[:spotify_auth] = request.env['omniauth.auth']
+        @user = Deviseuser.find_or_create_by(
             name: request.env['omniauth.auth'].info.display_name, 
             spotifyid:request.env['omniauth.auth'].info.id,
         )
+        @playlist = Playlist.new()
 
         if @user.persisted?
             @user.update(spotify_access_token: request.env['omniauth.auth'].credentials.token,
