@@ -3,11 +3,8 @@
     <p>Find me in app/views/pages/home.html.erb</p>
 
 
-    <%= link_to 'Sign in with Spotify', '/auth/spotify' %>
 
-    <% flash.each do |type, msg| %>
-        <div class="alert alert-info">
-            <%= msg %>
-        </div>
+    <% Devise.omniauth_providers.each do |provider| %>
+        <%= link_to "Sign in with #{OmniAuth::Utils.camelize(provider)}", deviseuser_spotify_omniauth_authorize_path %><br />
     <% end %>
 </div>
