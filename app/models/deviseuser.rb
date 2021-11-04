@@ -4,5 +4,6 @@ class Deviseuser < ApplicationRecord
   devise :database_authenticatable, :registerable,
          :recoverable, :rememberable, :validatable
   has_many :playlists
-  
+  validates_uniqueness_of :name, scope: [:spotifyid]
+
 end
