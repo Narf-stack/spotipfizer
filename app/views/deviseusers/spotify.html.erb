@@ -7,11 +7,11 @@
     </div>
 
     <nav class="menu">
-        <%= render partial:'users/partials/browse_media'%>
+        <%= render partial:'deviseusers/partials/browse_media'%>
     </nav>
 
     <nav class="menu">
-        <%= render partial:'users/partials/library'%>
+        <%= render partial:'deviseusers/partials/library'%>
     </nav>
 </aside>
 
@@ -26,8 +26,8 @@
         </div>
     </header>
     <main>
-        <%= render partial:'users/partials/release'%>
-        <%= render partial:'users/partials/toptrack'%>
+        <%= render partial:'deviseusers/partials/release'%>
+        <%= render partial:'deviseusers/partials/toptrack'%>
         <div class="track-list table">
             <header>
                 <h2><span>Your playlist</span></h2>
@@ -35,11 +35,11 @@
             </header>
             <% if  @tracks %>
                 <ul>
-                    <%= render partial:'users/partials/track', collection: @tracks, as: :track%>
+                    <%= render partial:'deviseusers/partials/track', collection: @tracks, as: :track%>
                 </ul>
             <% end %>
         </div>
     </main>
 </section>
 
-<%= render partial:'users/partials/currently-playing'%>
+<%= render partial:'deviseusers/partials/currently-playing'%>
