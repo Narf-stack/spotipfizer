@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2021_11_04_194510) do
+ActiveRecord::Schema.define(version: 2021_11_04_211749) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -42,6 +42,7 @@ ActiveRecord::Schema.define(version: 2021_11_04_194510) do
     t.integer "valence", default: 0
     t.integer "popularity", default: 0
     t.string "spotify_url", default: ""
+    t.text "genres", default: [], array: true
     t.index ["deviseuser_id"], name: "index_playlists_on_deviseuser_id"
   end
 
