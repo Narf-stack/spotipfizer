@@ -33,6 +33,8 @@
                 <h2><span>Your playlist</span></h2>
                 <a href="#" class="more">See All</a>
             </header>
+            <%= render partial:'deviseusers/partials/musical_genres',  locals:{genres:@spotify_music_genres}%>
+
             <% if  @tracks %>
                 <ul>
                     <%= render partial:'deviseusers/partials/track', collection: @tracks, as: :track%>
