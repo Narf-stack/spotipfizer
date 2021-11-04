@@ -4,6 +4,9 @@ class PlaylistsController < ApplicationController
     end
 
     def create
-        CreateSpotifyPlaylist.call(curent_user.spotify_access_token, curent_user.spotifyid)
+        token = curent_user.spotify_access_token
+        playlist_params = CreateSpotifyPlaylist.call(token, curent_user.spotifyid)
+        
+        AddSongsToSpotifyPlaylist.call(token, playlist_params.id,uris_list)
     end
 end
