@@ -12,7 +12,7 @@ class RetrieveSpotifyGenres < ApplicationService
             :headers => headers
           )
 
-        JSON.parse(response.body)['genres'].limit(MAX_NB_GENRES)
+        JSON.parse(response.body)['genres'].first(MAX_NB_GENRES)
     end
   end
   
