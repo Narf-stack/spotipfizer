@@ -34,6 +34,7 @@ gem 'simple_form'
 gem 'rspotify'
 gem 'devise'
 gem 'httparty', '~> 0.13.7'
+gem 'rails-controller-testing'
 group :development, :test do
   gem 'pry-byebug'
   gem 'pry-rails'
