@@ -4,8 +4,12 @@ class SearchRecosController < ApplicationController
     end
 
     def create
-        @search_reco = SearchReco.new(search_reco_params)
-        if @search_reco.save 
+        playlist = Playlist.new()
+        playlist.deviseuser = Deviseuser.order(:updated_at).last
+        playlist.save
+        search_reco = SearchReco.new(search_reco_params)
+        search_reco.playlist = playlist
+        if search_reco.save 
             flash[:notice] = "search_reco is successfully created."
         else
             render action: :new, error: "Error while creating new search_reco"

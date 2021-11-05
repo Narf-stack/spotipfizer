@@ -1,8 +1,6 @@
 <div class="new-form">
-    <%= simple_form_for(playlist) do |t| %>
-        <%= t.input  :name, placeholder:"NAME", label: false, maxlength: 15, autofocus:"true", input_html: { class: "input", id: "playlist-name" } %>
-
-        <%= t.association :genres, include_blank: false, include_hidden: false, input_html: { class: "select2" }, multiple: "multiple", label: false %>
+    <%= simple_form_for(search_reco) do |t| %>
+        
 
         <div class="slider-div">
             <%= t.label :energy %>

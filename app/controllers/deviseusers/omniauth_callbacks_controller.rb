@@ -17,7 +17,7 @@ class Deviseusers::OmniauthCallbacksController < Devise::OmniauthCallbacksContro
 
                     )
             @spotify_music_genres = RetrieveSpotifyGenres.call(@user.spotify_access_token)
-            
+            @search_reco = SearchReco.new()
             render :file => 'deviseusers/spotify.html', notice: "Welcome to a new journey'"
             set_flash_message(:notice, :success, kind: 'Spotify') if is_navigational_format?
         else
