@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2021_11_04_211749) do
+ActiveRecord::Schema.define(version: 2021_11_05_130224) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -46,6 +46,17 @@ ActiveRecord::Schema.define(version: 2021_11_04_211749) do
     t.index ["deviseuser_id"], name: "index_playlists_on_deviseuser_id"
   end
 
+  create_table "search_recos", force: :cascade do |t|
+    t.integer "energy", default: 0
+    t.integer "valence", default: 0
+    t.integer "popularity", default: 0
+    t.text "genres", default: [], array: true
+    t.bigint "playlist_id", null: false
+    t.datetime "created_at", precision: 6, null: false
+    t.datetime "updated_at", precision: 6, null: false
+    t.index ["playlist_id"], name: "index_search_recos_on_playlist_id"
+  end
+
   create_table "tracks", force: :cascade do |t|
     t.string "name", default: ""
     t.string "spotify_link_album", default: ""
@@ -68,5 +79,6 @@ ActiveRecord::Schema.define(version: 2021_11_04_211749) do
   end
 
   add_foreign_key "playlists", "deviseusers"
+  add_foreign_key "search_recos", "playlists"
   add_foreign_key "tracks", "playlists"
 end
