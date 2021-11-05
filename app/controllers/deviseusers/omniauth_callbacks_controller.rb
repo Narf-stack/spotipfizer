@@ -5,19 +5,12 @@ class Deviseusers::OmniauthCallbacksController < Devise::OmniauthCallbacksContro
 
     def spotify
         #   session[:spotify_auth] = request.env['omniauth.auth']
-        @user = Deviseuser.find_or_create_by(
-            name: request.env['omniauth.auth'].info.display_name, 
-            spotifyid:request.env['omniauth.auth'].info.id,
-        )
-        @playlist = Playlist.new()
+        @user = Deviseuser.from_omniauth(request.env['omniauth.auth'])
 
         if @user.persisted?
-            @user.update(spotify_access_token: request.env['omniauth.auth'].credentials.token,
-                         encrypted_password: Devise.friendly_token[0,20],
-
-                    )
-            @spotify_music_genres = RetrieveSpotifyGenres.call(@user.spotify_access_token)
+            @spotify_music_genres_array = RetrieveSpotifyGenres.call(@user.spotify_access_token)
             @search_reco = SearchReco.new()
+            
             render :file => 'deviseusers/spotify.html', notice: "Welcome to a new journey'"
             set_flash_message(:notice, :success, kind: 'Spotify') if is_navigational_format?
         else
