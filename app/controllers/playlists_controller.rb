@@ -1,5 +1,5 @@
 require_relative'../../services/spotify/add_songs_to_spotify_playlist.rb'
-require_relative'../../services/spotify/create_spotify_playlist.rb'
+# require_relative'../../services/spotify/create_spotify_playlist.rb'
 
 class PlaylistsController < ApplicationController
     def new
@@ -7,9 +7,9 @@ class PlaylistsController < ApplicationController
     end
 
     def create
-        token = curent_user.spotify_access_token
+        token = curent_deviseuser.spotify_access_token
 
-        playlist_params = CreateSpotifyPlaylist.call(token, curent_user.spotifyid)
+        playlist_params = CreateSpotifyPlaylist.call(token, curent_deviseuser.spotifyid)
         instantiate_new_playlist_in_db(playlist_params)
 
         AddSongsToSpotifyPlaylist.call(token, playlist_params.id,uris_list)

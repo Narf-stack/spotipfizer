@@ -2,6 +2,11 @@
     <%= simple_form_for(search_reco) do |t| %>
         
         <div class="slider-div">
+            <%= t.label :genres %>
+            <%= t.input_field :genres, multiple: true %>
+        </div>
+
+        <div class="slider-div">
             <%= t.label :energy %>
             <%= t.input :energy, input_html: { class: 'slider', step: 1, min: 0, max: 1, value: search_reco.energy }, as: :range, label: false, type: "range" %>
             <div class="slider-bg energy" %></div>
