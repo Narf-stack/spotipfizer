@@ -4,17 +4,10 @@ class Deviseusers::OmniauthCallbacksController < Devise::OmniauthCallbacksContro
     # rescue_from ActionDispatch::Cookies::CookieOverflow,  with: :clean_spotify_cookies
 
     def spotify
-    #   session[:spotify_auth] = request.env['omniauth.auth']
-      @user = Deviseuser.find_or_create_by(
-            name: request.env['omniauth.auth'].info.display_name, 
-            spotifyid:request.env['omniauth.auth'].info.id,
-        )
+        #   session[:spotify_auth] = request.env['omniauth.auth']
+        @user = Deviseuser.from_omniauth(request.env['omniauth.auth'])
 
         if @user.persisted?
-            @user.update(spotify_access_token: request.env['omniauth.auth'].credentials.token,
-                         encrypted_password: Devise.friendly_token[0,20],
-
-                    )
             @spotify_music_genres_array = RetrieveSpotifyGenres.call(@user.spotify_access_token)
             
             render :file => 'deviseusers/spotify.html', notice: "Welcome to a new journey'"
