@@ -13,7 +13,6 @@ class AddSongsToSpotifyPlaylist < ApplicationService
             body:JSON.generate({ "uris": uris_list})
         )
 
-        JSON.parse(response.body)
+        response
     end
-  end
-  
+end

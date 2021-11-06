@@ -1,5 +1,4 @@
 class GetRecommendations < ApplicationService
-
     def self.call(token,params={})
         max_tracks = 5
         RSpotify.authenticate(ENV['CLIENT_ID_SPOTIFY'], ENV['CLIENT_SECRET_SPOTIFY'])
@@ -20,6 +19,7 @@ class GetRecommendations < ApplicationService
         #     limit: max_tracks,
         #     from_token: token
         # )
+        
         recommendations.tracks
     end
 
