@@ -3,8 +3,8 @@
         <%= hidden_field_tag :userid, userid %>
 
         <% genres.each do |g|%> 
-            <%= t.label :g %>
-            <%= t.check_box :genres,  {multiple: true},g %>
+            <%= t.label :genres, "#{g}".html_safe %>
+            <%= t.check_box :genres,  {multiple: true} %>
         <% end %>
 
 
