@@ -16,7 +16,7 @@ class CreateSpotifyPlaylist < ApplicationService
                 })
         )
 
-        JSON.parse(playlist_response.body)
+        JSON.parse(response.body)
     end
   end
   

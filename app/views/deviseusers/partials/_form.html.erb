@@ -1,26 +1,28 @@
 <div class="new-form">
     <%= simple_form_for(search_reco) do |t| %>
-        
-        <div class="slider-div">
-            <%= t.label :genres %>
-            <%= t.input_field :genres, multiple: true %>
-        </div>
+        <%= hidden_field_tag :userid, userid %>
+
+        <% genres.each do |g|%> 
+            <%= t.label :genres, "#{g}".html_safe %>
+            <%= t.check_box :genres,  {multiple: true}, g %>
+        <% end %>
+
 
         <div class="slider-div">
             <%= t.label :energy %>
-            <%= t.input :energy, input_html: { class: 'slider', step: 1, min: 0, max: 1, value: search_reco.energy }, as: :range, label: false, type: "range" %>
+            <%= t.input :energy, input_html: { class: 'slider', step: 0.1, min: 0, max: 1, value: search_reco.energy }, as: :range, label: false, type: "range" %>
             <div class="slider-bg energy" %></div>
         </div>
 
         <div class="slider-div">
             <%= t.label :valence %>
-            <%= t.input :valence, input_html: { class: 'slider', step: 1, min: 0, max: 1 , value: search_reco.valence}, as: :range, label: false, type: "range" %>
+            <%= t.input :valence, input_html: { class: 'slider', step: 0.1, min: 0, max: 1 , value: search_reco.valence}, as: :range, label: false, type: "range" %>
             <div class="slider-bg valence"%></div>
         </div>
 
         <div class="slider-div">
             <%= t.label :popularity %>
-            <%= t.input :popularity, input_html: { class: 'slider', step: 1, min: 0, max: 1, value: search_reco.popularity }, as: :range, label: false,  type: "range" %>
+            <%= t.input :popularity, input_html: { class: 'slider', step: 0.1, min: 0, max: 1, value: search_reco.popularity }, as: :range, label: false,  type: "range" %>
             <div class="slider-bg popularity" %></div>
         </div>
 
