@@ -1,4 +1,6 @@
+require_relative'../../services/spotify/get_recommendations.rb'
 require_relative'../../services/spotify/create_spotify_playlist.rb'
+require_relative'../../services/spotify/add_songs_to_spotify_playlist.rb'
 
 class SearchRecosController < ApplicationController
     def new
@@ -7,19 +9,19 @@ class SearchRecosController < ApplicationController
 
     def create
         # binding.pry
+        token = curent_deviseuser.spotify_access_token
+
         playlist = instantiate_new_playlist_in_db
+
         search_reco = instantiate_new_search_reco_in_db(playlist)
-        recommendations = GetRecommendations.call(curent_user.spotify_access_token,search_reco)
+        recommendations = GetRecommendations.call(token,search_reco)
+
         Track.create_tracks(playlist, recommendations)
-        # push track on spotify playlist
-        # AddSongsToSpotifyPlaylist.call(token, playlist_params.id,uris_list)
 
-        # if search_reco.save 
-        #     flash[:notice] = "search_reco is successfully created."
-        # else
-        #     render action: :new, error: "Error while creating new search_reco"
-        # end
+        playlist_params = CreateSpotifyPlaylist.call(token, curent_deviseuser.spotifyid)
+        update_saved_playlist_in_db(playlist_params,playlist)
 
+        AddSongsToSpotifyPlaylist.call(token, playlist_params.id,uris_list)
     end
 
     def instantiate_new_playlist_in_db
@@ -38,21 +40,14 @@ class SearchRecosController < ApplicationController
         search_reco
     end
 
-    # def instantiate_new_playlist_in_db(params)
-    #     playlist = Playlist.new(name:params['name'],
-    #         description:params['description'],
-    #         playlist_spotifyid:params['id'],
-    #         spotify_url:params['external_urls']['spotify'],
-    #         deviseuser: curent_user,
-    #     )
-
-    #     if playlist.save
-    #         flash[:success] = "Your playlist has been created to your Spotify account!"
-    #     else
-    #         errors = playlist.errors.full_messages.to_sentence
-    #         flash[:notice] = "Sorry the playlist could not be created due to Spotify API Error"
-    #     end
-    # end
+    def update_saved_playlist_in_db(params,playlist)
+        playlist.update(name:params['name'],
+            description:params['description'],
+            playlist_spotifyid:params['id'],
+            spotify_url:params['external_urls']['spotify'],
+            deviseuser: curent_deviseuser
+        )
+    end
 
     private
     def search_reco_params
