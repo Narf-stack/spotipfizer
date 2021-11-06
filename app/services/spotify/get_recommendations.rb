@@ -20,6 +20,7 @@ class GetRecommendations < ApplicationService
         #     limit: max_tracks,
         #     from_token: token
         # )
+        # binding.pry
         recommendations.tracks
     end
 

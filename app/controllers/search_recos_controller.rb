@@ -9,7 +9,11 @@ class SearchRecosController < ApplicationController
         # binding.pry
         playlist = instantiate_new_playlist_in_db
         search_reco = instantiate_new_search_reco_in_db(playlist)
-        #GET RECO
+        recommendations = GetRecommendations.call(curent_user.spotify_access_token,search_reco)
+        Track.create_tracks(playlist, recommendations)
+        # push track on spotify playlist
+        # AddSongsToSpotifyPlaylist.call(token, playlist_params.id,uris_list)
+
         # if search_reco.save 
         #     flash[:notice] = "search_reco is successfully created."
         # else
@@ -33,15 +37,6 @@ class SearchRecosController < ApplicationController
 
         search_reco
     end
-
-    # def create
-    #     token = curent_user.spotify_access_token
-
-    #     playlist_params = CreateSpotifyPlaylist.call(token, curent_user.spotifyid)
-    #     instantiate_new_playlist_in_db(playlist_params)
-
-    #     AddSongsToSpotifyPlaylist.call(token, playlist_params.id,uris_list)
-    # end
 
     # def instantiate_new_playlist_in_db(params)
     #     playlist = Playlist.new(name:params['name'],
