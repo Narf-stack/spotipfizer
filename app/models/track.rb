@@ -8,7 +8,7 @@ class Track < ApplicationRecord
         artists: reco.artists.map{ |artist| artist.name},
         # spotify_link_album: reco.external_urls["spotify"],
         spotify_track_link: reco.external_urls["spotify"],
-        spotify_track_id: reco.id,
+        # spotify_track_id: reco.id,
         spotify_track_uri:reco.uri,
         url_image: reco.album.images.first['url']
       )

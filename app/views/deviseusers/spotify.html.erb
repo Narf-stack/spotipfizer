@@ -33,7 +33,7 @@
                 <h2><span>Your playlist</span></h2>
             </header>
             <%= render partial:'deviseusers/partials/musical_genres',  locals:{genres:@spotify_music_genres}%>
-            <%= render partial:'deviseusers/partials/form',  locals:{search_reco:@search_reco}%>
+            <%= render partial:'deviseusers/partials/form',  locals:{search_reco:@search_reco, genres: @spotify_music_genres_array, userid: @user.id}%>
 
             <% if  @tracks %>
                 <ul>
