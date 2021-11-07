@@ -3,6 +3,7 @@ require_relative'../services/spotify/create_spotify_playlist.rb'
 require_relative'../services/spotify/add_songs_to_spotify_playlist.rb'
 
 class SearchRecosController < ApplicationController
+    skip_before_action :verify_authenticity_token
     def new
         @search_reco = SearchReco.new()
     end

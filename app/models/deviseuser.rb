@@ -2,7 +2,7 @@ class Deviseuser < ApplicationRecord
   devise :database_authenticatable, :registerable,
          :recoverable, :rememberable,:omniauthable,
          omniauth_providers: %i[spotify],:authentication_keys => [:name]
-  has_many :playlists
+  has_many :playlists, dependent: :destroy
   validates_uniqueness_of :name, scope: [:spotifyid]
 
 
